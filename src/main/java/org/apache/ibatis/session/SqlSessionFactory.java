@@ -22,10 +22,14 @@ import java.sql.Connection;
  * 
  * @author Clinton Begin
  */
+
+// 源码解析: SqlSession工厂, 用来创建一个数据库连接(Connection或DataSource)的会话
 public interface SqlSessionFactory {
 
+  // 源码解析: 创建一个SqlSession, 事务非自动提交
   SqlSession openSession();
 
+  // 源码解析: 创建一个SqlSession, autoCommit代表是否自动提交事务
   SqlSession openSession(boolean autoCommit);
   SqlSession openSession(Connection connection);
   SqlSession openSession(TransactionIsolationLevel level);

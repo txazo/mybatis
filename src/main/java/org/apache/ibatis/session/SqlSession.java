@@ -29,6 +29,14 @@ import org.apache.ibatis.executor.BatchResult;
  *
  * @author Clinton Begin
  */
+
+/**
+ * 源码解析: MyBatis的核心接口, 提供以下功能
+ *
+ * 1) 执行sql命令(insert delete update select)
+ * 2) 获取Mapper(getMapper)
+ * 3) 管理事务(commit rollback)
+ */
 public interface SqlSession extends Closeable {
 
   /**

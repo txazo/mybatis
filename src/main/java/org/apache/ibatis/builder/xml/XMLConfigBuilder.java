@@ -47,8 +47,11 @@ import org.apache.ibatis.type.JdbcType;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: XML配置解析器
 public class XMLConfigBuilder extends BaseBuilder {
 
+  // 是否解析过
   private boolean parsed;
   private XPathParser parser;
   private String environment;
@@ -92,16 +95,25 @@ public class XMLConfigBuilder extends BaseBuilder {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
     parsed = true;
+
+    // 源码解析: 解析MyBatis的配置
     parseConfiguration(parser.evalNode("/configuration"));
     return configuration;
   }
 
   private void parseConfiguration(XNode root) {
     try {
+      // 源码解析: 解析MyBatis的配置
+
+      // 源码解析: 解析settings配置
       Properties settings = settingsAsPropertiess(root.evalNode("settings"));
       //issue #117 read properties first
+
+      // 源码解析: 解析properties
       propertiesElement(root.evalNode("properties"));
       loadCustomVfs(settings);
+
+      // 源码解析: typeAliases
       typeAliasesElement(root.evalNode("typeAliases"));
       pluginElement(root.evalNode("plugins"));
       objectFactoryElement(root.evalNode("objectFactory"));
@@ -122,8 +134,11 @@ public class XMLConfigBuilder extends BaseBuilder {
     if (context == null) {
       return new Properties();
     }
+    // 源码解析: settings配置转换为Properties
     Properties props = context.getChildrenAsProperties();
     // Check that all settings are known to the configuration class
+
+    // 源码解析: 检查所有的settings配置是否有效
     MetaClass metaConfig = MetaClass.forClass(Configuration.class, localReflectorFactory);
     for (Object key : props.keySet()) {
       if (!metaConfig.hasSetter(String.valueOf(key))) {
