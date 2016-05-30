@@ -4,9 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <settings>
-        <setting name="cacheEnabled" value="false"/>
-        <setting name="logImpl" value="LOG4J"/>
-    </settings>
+    <mappers>
+        <!--<mapper class=""/>-->
+        <!--<mapper url=""/>-->
+        <!--<mapper resource=""/>-->
+        <package name="test.mybatis.mapper"/>
+    </mappers>
 
 </configuration>

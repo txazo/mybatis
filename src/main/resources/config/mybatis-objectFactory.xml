@@ -4,9 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <settings>
-        <setting name="cacheEnabled" value="false"/>
-        <setting name="logImpl" value="LOG4J"/>
-    </settings>
+    <objectFactory type="test.mybatis.factory.MyBatisObjectFactory">
+        <property name="user" value="root"/>
+    </objectFactory>
 
 </configuration>

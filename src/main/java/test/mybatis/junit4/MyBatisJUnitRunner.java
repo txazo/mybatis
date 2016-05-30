@@ -15,6 +15,7 @@ public class MyBatisJUnitRunner extends BlockJUnit4ClassRunner {
 
     private boolean isMyBatisTest = false;
     private Method setSqlSessionMethod;
+    private Method sqlSessionFactoryMethod;
 
     public MyBatisJUnitRunner(Class<?> clazz) throws InitializationError {
         super(clazz);
@@ -26,6 +27,7 @@ public class MyBatisJUnitRunner extends BlockJUnit4ClassRunner {
         if (isMyBatisTest) {
             try {
                 setSqlSessionMethod = clazz.getMethod("setSqlSession", SqlSession.class);
+                sqlSessionFactoryMethod = clazz.getMethod("setSqlSessionFactory", SqlSessionFactory.class);
             } catch (Exception e) {
                 throw new MyBatisJUnitException("MyBatisJUnitRunner init failed", e);
             }
@@ -44,8 +46,9 @@ public class MyBatisJUnitRunner extends BlockJUnit4ClassRunner {
             if (myBatisTest != null) {
                 try {
                     SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(myBatisTest.resource()));
+                    sqlSessionFactoryMethod.invoke(test, factory);
                     if (myBatisTest.openSession()) {
-                        setSqlSessionMethod.invoke(test, factory.openSession());
+                        setSqlSessionMethod.invoke(test, factory.openSession(myBatisTest.autoCommit()));
                     }
                 } catch (Exception e) {
                     throw new MyBatisJUnitException("MyBatisJUnitRunner injectSqlSession failed", e);

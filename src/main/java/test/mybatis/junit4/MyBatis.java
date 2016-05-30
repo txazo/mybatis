@@ -13,4 +13,6 @@ public @interface MyBatis {
 
     boolean openSession() default true;
 
+    boolean autoCommit() default true;
+
 }

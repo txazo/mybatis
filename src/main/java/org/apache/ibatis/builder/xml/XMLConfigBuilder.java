@@ -109,18 +109,28 @@ public class XMLConfigBuilder extends BaseBuilder {
       Properties settings = settingsAsPropertiess(root.evalNode("settings"));
       //issue #117 read properties first
 
-      // 源码解析: 解析properties
+      // 源码解析: 解析properties配置
       propertiesElement(root.evalNode("properties"));
+
+      // 源码解析: 加载自定义的文件系统
       loadCustomVfs(settings);
 
-      // 源码解析: typeAliases
+      // 源码解析: 解析类型别名配置
       typeAliasesElement(root.evalNode("typeAliases"));
+
+      // 源码解析: 解析插件配置
       pluginElement(root.evalNode("plugins"));
+
+      // 源码解析: 解析并设置对象工厂
       objectFactoryElement(root.evalNode("objectFactory"));
+
+      // 源码解析: 解析并设置对象包装工厂
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
       reflectionFactoryElement(root.evalNode("reflectionFactory"));
       settingsElement(settings);
       // read it after objectFactory and objectWrapperFactory issue #631
+
+      // 源码解析: 解析数据库环境配置
       environmentsElement(root.evalNode("environments"));
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
       typeHandlerElement(root.evalNode("typeHandlers"));

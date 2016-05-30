@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <settings>
-        <setting name="cacheEnabled" value="false"/>
-        <setting name="logImpl" value="LOG4J"/>
-    </settings>
+    <properties resource="config/server.properties">
+        <property name="user" value="root"/>
+        <property name="passwd" value="root"/>
+    </properties>
 
 </configuration>

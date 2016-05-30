@@ -4,9 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <settings>
-        <setting name="cacheEnabled" value="false"/>
-        <setting name="logImpl" value="LOG4J"/>
-    </settings>
+    <typeHandlers>
+        <package name="test.mybatis.handler"/>
+    </typeHandlers>
 
 </configuration>
