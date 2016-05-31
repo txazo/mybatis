@@ -8,6 +8,14 @@
         insert into Mobile(os, brand, model, price) values (#{os}, #{brand}, #{model}, #{price})
     </insert>
 
+    <delete id="deleteMobile" parameterType="int">
+        delete from Mobile where id = #{id} limit 1
+    </delete>
+
+    <update id="updateMobilePrice" parameterType="mobile">
+        update Mobile set price = #{price} where id = #{id} limit 1
+    </update>
+
     <select id="selectMobileById" parameterType="int" resultType="mobile">
         select * from Mobile where id = #{id} limit 1
     </select>

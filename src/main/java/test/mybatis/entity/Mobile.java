@@ -1,5 +1,6 @@
 package test.mybatis.entity;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
@@ -14,6 +15,21 @@ public class Mobile implements Serializable {
     private String brand;
     private String model;
     private int price;
+
+    public Mobile() {
+    }
+
+    public Mobile(int id, int price) {
+        this.id = id;
+        this.price = price;
+    }
+
+    public Mobile(String os, String brand, String model, int price) {
+        this.os = os;
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+    }
 
     public int getId() {
         return id;
@@ -53,6 +69,11 @@ public class Mobile implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 
 }
