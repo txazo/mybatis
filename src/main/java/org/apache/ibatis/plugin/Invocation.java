@@ -21,10 +21,15 @@ import java.lang.reflect.Method;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 调用
 public class Invocation {
 
+  // 源码解析: 目标对象
   private Object target;
+  // 源码解析: 方法
   private Method method;
+  // 源码解析: 参数
   private Object[] args;
 
   public Invocation(Object target, Method method, Object[] args) {

@@ -18,6 +18,8 @@ package org.apache.ibatis.executor;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 错误上下文
 public class ErrorContext {
 
   private static final String LINE_SEPARATOR = System.getProperty("line.separator","\n");

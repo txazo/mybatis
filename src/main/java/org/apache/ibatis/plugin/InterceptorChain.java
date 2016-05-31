@@ -22,6 +22,8 @@ import java.util.List;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 拦截器链
 public class InterceptorChain {
 
   private final List<Interceptor> interceptors = new ArrayList<Interceptor>();

@@ -20,11 +20,23 @@ import java.sql.Connection;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 事务隔离级别
 public enum TransactionIsolationLevel {
+
+  // 源码解析: 无事务, 不支持事务
   NONE(Connection.TRANSACTION_NONE),
+
+  // 源码解析: 读提交, 不允许脏读, 允许不可重复读、允许幻读
   READ_COMMITTED(Connection.TRANSACTION_READ_COMMITTED),
+
+  // 源码解析: 读未提交, 允许脏读 不可重复读、允许幻读
   READ_UNCOMMITTED(Connection.TRANSACTION_READ_UNCOMMITTED),
+
+  // 源码解析: 重复读, 不允许脏读、不可重复读, 允许幻读, MySQL的默认隔离级别
   REPEATABLE_READ(Connection.TRANSACTION_REPEATABLE_READ),
+
+  // 源码解析: 序列化, 不允许脏读、不可重复读、幻读
   SERIALIZABLE(Connection.TRANSACTION_SERIALIZABLE);
 
   private final int level;

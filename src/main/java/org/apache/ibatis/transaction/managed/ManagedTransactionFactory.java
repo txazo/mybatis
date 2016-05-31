@@ -31,6 +31,8 @@ import org.apache.ibatis.transaction.TransactionFactory;
  *
  * @see ManagedTransaction
  */
+
+// 源码解析: 容器管理的事务工厂
 public class ManagedTransactionFactory implements TransactionFactory {
 
   private boolean closeConnection = true;

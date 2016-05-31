@@ -38,6 +38,8 @@ import org.apache.ibatis.transaction.Transaction;
 /**
  * @author Jeff Butler 
  */
+
+// 源码解析: 批量执行器
 public class BatchExecutor extends BaseExecutor {
 
   public static final int BATCH_UPDATE_RETURN_VALUE = Integer.MIN_VALUE + 1002;

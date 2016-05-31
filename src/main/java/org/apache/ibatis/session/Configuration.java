@@ -534,15 +534,20 @@ public class Configuration {
     executorType = executorType == null ? ExecutorType.SIMPLE : executorType;
     Executor executor;
     if (ExecutorType.BATCH == executorType) {
+      // 源码解析: 创建批量执行器
       executor = new BatchExecutor(this, transaction);
     } else if (ExecutorType.REUSE == executorType) {
+      // 源码解析: 创建复用执行器
       executor = new ReuseExecutor(this, transaction);
     } else {
+      // 源码解析: 创建简单执行器
       executor = new SimpleExecutor(this, transaction);
     }
     if (cacheEnabled) {
+      // 源码解析: 创建缓存执行器
       executor = new CachingExecutor(executor);
     }
+    // 源码解析: 添加拦截器插件
     executor = (Executor) interceptorChain.pluginAll(executor);
     return executor;
   }

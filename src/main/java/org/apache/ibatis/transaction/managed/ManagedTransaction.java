@@ -36,13 +36,25 @@ import org.apache.ibatis.transaction.Transaction;
  *
  * @see ManagedTransactionFactory
  */
+
+/**
+ * 源码解析: 容器管理的事务, 让容器来管理事务的整个生命周期
+ *
+ * 1) getConnection()被调用时, 才去检索数据库连接
+ * 2) 忽略所有的commit()和rollback()
+ * 3) 默认关闭连接, 也可以被配置为不关闭
+ */
 public class ManagedTransaction implements Transaction {
 
   private static final Log log = LogFactory.getLog(ManagedTransaction.class);
 
+  // 源码解析: 数据源
   private DataSource dataSource;
+  // 源码解析: 事务隔离级别
   private TransactionIsolationLevel level;
+  // 源码解析: 数据库连接
   private Connection connection;
+  // 源码解析: 是否关闭连接
   private boolean closeConnection;
 
   public ManagedTransaction(Connection connection, boolean closeConnection) {

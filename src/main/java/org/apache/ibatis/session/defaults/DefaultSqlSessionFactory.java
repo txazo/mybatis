@@ -87,18 +87,33 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
     return configuration;
   }
 
+    /**
+     * 源码解析: 从数据源创建会话
+     *
+     * @param execType 执行类型
+     * @param level 数据库隔离级别
+     * @param autoCommit 是否自动提交
+     * @return
+     */
   private SqlSession openSessionFromDataSource(ExecutorType execType, TransactionIsolationLevel level, boolean autoCommit) {
     Transaction tx = null;
     try {
+      // 源码解析: 获取环境
       final Environment environment = configuration.getEnvironment();
+      // 源码解析: 获取事务工厂
       final TransactionFactory transactionFactory = getTransactionFactoryFromEnvironment(environment);
+      // 源码解析: 创建一个新的事务
       tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);
+      // 源码解析: 创建执行器
       final Executor executor = configuration.newExecutor(tx, execType);
+      // 源码解析: 创建一个新的sql会话
       return new DefaultSqlSession(configuration, executor, autoCommit);
     } catch (Exception e) {
+      // 源码解析: 关闭事务
       closeTransaction(tx); // may have fetched a connection so lets call close()
       throw ExceptionFactory.wrapException("Error opening session.  Cause: " + e, e);
     } finally {
+      // 源码解析: 错误上下文清空重置
       ErrorContext.instance().reset();
     }
   }
@@ -127,8 +142,10 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
 
   private TransactionFactory getTransactionFactoryFromEnvironment(Environment environment) {
     if (environment == null || environment.getTransactionFactory() == null) {
+      // 源码解析: 默认返回容器管理的事务工厂
       return new ManagedTransactionFactory();
     }
+    // 源码解析: 返回配置的事务工厂
     return environment.getTransactionFactory();
   }
 

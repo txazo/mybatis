@@ -35,13 +35,25 @@ import org.apache.ibatis.transaction.TransactionException;
  *
  * @see JdbcTransactionFactory
  */
+
+/**
+ * 源码解析: JDBC事务, 直接使用JDBC的提交和回滚机制
+ *
+ * 1) 依赖于从数据源检索数据库连接来管理事务的作用域
+ * 2) getConnection()被调用时, 才去检索数据库连接
+ * 3) 当自动提交开启时, commit()和rollback()什么都不做
+ */
 public class JdbcTransaction implements Transaction {
 
   private static final Log log = LogFactory.getLog(JdbcTransaction.class);
 
+  // 源码解析: 数据库连接
   protected Connection connection;
+  // 源码解析: 数据源
   protected DataSource dataSource;
+  // 源码解析: 事务隔离级别
   protected TransactionIsolationLevel level;
+  // 源码解析: 是否自动提交
   protected boolean autoCommmit;
 
   public JdbcTransaction(DataSource ds, TransactionIsolationLevel desiredLevel, boolean desiredAutoCommit) {
@@ -68,6 +80,7 @@ public class JdbcTransaction implements Transaction {
       if (log.isDebugEnabled()) {
         log.debug("Committing JDBC Connection [" + connection + "]");
       }
+      // 源码解析: 事务提交
       connection.commit();
     }
   }
@@ -78,6 +91,7 @@ public class JdbcTransaction implements Transaction {
       if (log.isDebugEnabled()) {
         log.debug("Rolling back JDBC Connection [" + connection + "]");
       }
+      // 源码解析: 事务回滚
       connection.rollback();
     }
   }
@@ -89,6 +103,7 @@ public class JdbcTransaction implements Transaction {
       if (log.isDebugEnabled()) {
         log.debug("Closing JDBC Connection [" + connection + "]");
       }
+      // 源码解析: 数据库连接关闭
       connection.close();
     }
   }
@@ -135,6 +150,7 @@ public class JdbcTransaction implements Transaction {
     if (log.isDebugEnabled()) {
       log.debug("Opening JDBC Connection");
     }
+    // 源码解析: 从数据源获取数据库连接, 并设置事务隔离级别和是否自动提交
     connection = dataSource.getConnection();
     if (level != null) {
       connection.setTransactionIsolation(level.getLevel());

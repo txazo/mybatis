@@ -25,6 +25,8 @@ import java.sql.Statement;
  *
  * @author Clinton Begin
  */
+
+// 源码解析: 事务, 包装一个数据库连接, 处理数据库连接的生命周期, 包括创建 预编译 提交 回滚 关闭
 public interface Transaction {
 
   /**
@@ -32,30 +34,40 @@ public interface Transaction {
    * @return DataBase connection
    * @throws SQLException
    */
+
+  // 源码解析: 获取内部的数据库连接
   Connection getConnection() throws SQLException;
 
   /**
    * Commit inner database connection.
    * @throws SQLException
    */
+
+  // 源码解析: 提交事务
   void commit() throws SQLException;
 
   /**
    * Rollback inner database connection.
    * @throws SQLException
    */
+
+  // 源码解析: 回滚事务
   void rollback() throws SQLException;
 
   /**
    * Close inner database connection.
    * @throws SQLException
    */
+
+  // 源码解析: 关闭数据库连接
   void close() throws SQLException;
 
   /**
    * Get transaction timeout if set
    * @throws SQLException
    */
+
+  // 源码解析: 获取事务超时时间
   Integer getTimeout() throws SQLException;
   
 }

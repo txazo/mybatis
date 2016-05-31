@@ -22,9 +22,15 @@ import org.apache.ibatis.transaction.TransactionFactory;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 数据库环境
 public final class Environment {
+
+  // 源码解析: id
   private final String id;
+  // 源码解析: 事务工厂
   private final TransactionFactory transactionFactory;
+  // 源码解析: 数据源
   private final DataSource dataSource;
 
   public Environment(String id, TransactionFactory transactionFactory, DataSource dataSource) {

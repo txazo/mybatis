@@ -30,6 +30,10 @@ import org.apache.ibatis.transaction.Transaction;
 /**
  * @author Clinton Begin
  */
+
+/**
+ * 源码解析: 执行器
+ */
 public interface Executor {
 
   ResultHandler NO_RESULT_HANDLER = null;

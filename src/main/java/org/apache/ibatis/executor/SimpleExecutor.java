@@ -34,6 +34,8 @@ import java.util.List;
 /**
  * @author Clinton Begin
  */
+
+// 简单执行器
 public class SimpleExecutor extends BaseExecutor {
 
   public SimpleExecutor(Configuration configuration, Transaction transaction) {

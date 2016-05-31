@@ -4,8 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test.mybatis.mapper.MobileMapper">
 
-    <insert id="addMobile">
+    <insert id="insertMobile" parameterType="mobile">
         insert into Mobile(os, brand, model, price) values (#{os}, #{brand}, #{model}, #{price})
     </insert>
+
+    <select id="selectMobileById" parameterType="int" resultType="mobile">
+        select * from Mobile where id = #{id} limit 1
+    </select>
+
+    <select id="selectAllMobile" resultType="mobile">
+        select * from Mobile
+    </select>
+
+    <select id="selectAllMobileForMap" resultType="hashmap">
+        select * from Mobile
+    </select>
 
 </mapper>

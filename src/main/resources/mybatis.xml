@@ -4,4 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+
+    <typeAliases>
+        <package name="test.mybatis.entity"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="test.mybatis.plugin.ExecutorInterceptor"/>
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+                <property name="poolMaximumActiveConnections" value="${poolMaximumActiveConnections}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="test.mybatis.mapper"/>
+    </mappers>
+
 </configuration>

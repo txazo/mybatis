@@ -9,10 +9,19 @@ public class Mobile implements Serializable {
 
     private static final long serialVersionUID = -5438339795954006852L;
 
+    private int id;
     private String os;
     private String brand;
     private String model;
     private int price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getOs() {
         return os;

@@ -31,6 +31,8 @@ import org.apache.ibatis.transaction.TransactionFactory;
  *
  * @see JdbcTransaction
  */
+
+// 源码解析: JDBC事务工厂, 依赖于Connection的commit()和rollback()机制
 public class JdbcTransactionFactory implements TransactionFactory {
 
   @Override
@@ -39,11 +41,13 @@ public class JdbcTransactionFactory implements TransactionFactory {
 
   @Override
   public Transaction newTransaction(Connection conn) {
+    // 源码解析: 返回JDBC事务
     return new JdbcTransaction(conn);
   }
 
   @Override
   public Transaction newTransaction(DataSource ds, TransactionIsolationLevel level, boolean autoCommit) {
+    // 源码解析: 返回JDBC事务
     return new JdbcTransaction(ds, level, autoCommit);
   }
 }
