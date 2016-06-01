@@ -25,6 +25,8 @@ import java.util.List;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 结果集处理
 public interface ResultSetHandler {
 
   <E> List<E> handleResultSets(Statement stmt) throws SQLException;

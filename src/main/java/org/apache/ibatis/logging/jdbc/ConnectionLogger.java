@@ -32,6 +32,8 @@ import org.apache.ibatis.reflection.ExceptionUtil;
  * @author Eduardo Macarron
  * 
  */
+
+// 源码解析: 记录日志的数据库连接
 public final class ConnectionLogger extends BaseJdbcLogger implements InvocationHandler {
 
   private Connection connection;

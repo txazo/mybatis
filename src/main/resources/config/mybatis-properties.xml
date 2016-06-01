@@ -9,4 +9,6 @@
         <property name="passwd" value="root"/>
     </properties>
 
+    <!--<properties url="http://127.0.0.1:8080/config/server.properties"/>-->
+
 </configuration>

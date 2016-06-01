@@ -94,6 +94,7 @@ public class XMLConfigBuilder extends BaseBuilder {
     if (parsed) {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
     }
+    // 源码解析: 设置已解析标识
     parsed = true;
 
     // 源码解析: 解析MyBatis的配置
@@ -126,14 +127,24 @@ public class XMLConfigBuilder extends BaseBuilder {
 
       // 源码解析: 解析并设置对象包装工厂
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
+
+      // 源码解析: 无效标签
       reflectionFactoryElement(root.evalNode("reflectionFactory"));
+
+      // 源码解析: 设置自定义的settings配置到Configuration中
       settingsElement(settings);
       // read it after objectFactory and objectWrapperFactory issue #631
 
       // 源码解析: 解析数据库环境配置
       environmentsElement(root.evalNode("environments"));
+
+      // 源码解析: 解析数据库ID提供者
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
+
+      // 源码解析: 解析类型转换
       typeHandlerElement(root.evalNode("typeHandlers"));
+
+      // 源码解析: 解析Mapper映射
       mapperElement(root.evalNode("mappers"));
     } catch (Exception e) {
       throw new BuilderException("Error parsing SQL Mapper Configuration. Cause: " + e, e);

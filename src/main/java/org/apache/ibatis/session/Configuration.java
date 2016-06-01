@@ -93,8 +93,11 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 配置
 public class Configuration {
 
+  // 源码解析: 数据库环境
   protected Environment environment;
 
   protected boolean safeRowBoundsEnabled = false;
@@ -104,6 +107,7 @@ public class Configuration {
   protected boolean multipleResultSetsEnabled = true;
   protected boolean useGeneratedKeys = false;
   protected boolean useColumnLabel = true;
+  // 源码解析:
   protected boolean cacheEnabled = true;
   protected boolean callSettersOnNulls = false;
 
@@ -119,15 +123,20 @@ public class Configuration {
   protected AutoMappingBehavior autoMappingBehavior = AutoMappingBehavior.PARTIAL;
   protected AutoMappingUnknownColumnBehavior autoMappingUnknownColumnBehavior = AutoMappingUnknownColumnBehavior.NONE;
 
+  // 源码解析: 变量属性
   protected Properties variables = new Properties();
   protected ReflectorFactory reflectorFactory = new DefaultReflectorFactory();
+  // 源码解析: 对象工厂
   protected ObjectFactory objectFactory = new DefaultObjectFactory();
+  // 源码解析: 对象包装工厂
   protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
+  // 源码解析: Mapper映射注册表
   protected MapperRegistry mapperRegistry = new MapperRegistry(this);
 
   protected boolean lazyLoadingEnabled = false;
   protected ProxyFactory proxyFactory = new JavassistProxyFactory(); // #224 Using internal Javassist instead of OGNL
 
+  // 源码解析: 数据库ID
   protected String databaseId;
   /**
    * Configuration factory class.
@@ -137,8 +146,11 @@ public class Configuration {
    */
   protected Class<?> configurationFactory;
 
+  // 源码解析: 拦截器链
   protected final InterceptorChain interceptorChain = new InterceptorChain();
+  // 源码解析: TypeHandler注册表
   protected final TypeHandlerRegistry typeHandlerRegistry = new TypeHandlerRegistry();
+  // 源码解析: 类型别名注册表
   protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
   protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
 
@@ -169,24 +181,30 @@ public class Configuration {
   }
 
   public Configuration() {
+    // 源码解析: 注册事务工厂别名
     typeAliasRegistry.registerAlias("JDBC", JdbcTransactionFactory.class);
     typeAliasRegistry.registerAlias("MANAGED", ManagedTransactionFactory.class);
 
+    // 源码解析: 注册数据源工厂别名
     typeAliasRegistry.registerAlias("JNDI", JndiDataSourceFactory.class);
     typeAliasRegistry.registerAlias("POOLED", PooledDataSourceFactory.class);
     typeAliasRegistry.registerAlias("UNPOOLED", UnpooledDataSourceFactory.class);
 
+    // 源码解析: 注册缓存别名
     typeAliasRegistry.registerAlias("PERPETUAL", PerpetualCache.class);
     typeAliasRegistry.registerAlias("FIFO", FifoCache.class);
     typeAliasRegistry.registerAlias("LRU", LruCache.class);
     typeAliasRegistry.registerAlias("SOFT", SoftCache.class);
     typeAliasRegistry.registerAlias("WEAK", WeakCache.class);
 
+    // 源码解析: 注册VendorDatabaseIdProvider别名
     typeAliasRegistry.registerAlias("DB_VENDOR", VendorDatabaseIdProvider.class);
 
+    // 源码解析: 注册LanguageDriver别名
     typeAliasRegistry.registerAlias("XML", XMLLanguageDriver.class);
     typeAliasRegistry.registerAlias("RAW", RawLanguageDriver.class);
 
+    // 源码解析: 注册日志实现别名
     typeAliasRegistry.registerAlias("SLF4J", Slf4jImpl.class);
     typeAliasRegistry.registerAlias("COMMONS_LOGGING", JakartaCommonsLoggingImpl.class);
     typeAliasRegistry.registerAlias("LOG4J", Log4jImpl.class);
@@ -195,6 +213,7 @@ public class Configuration {
     typeAliasRegistry.registerAlias("STDOUT_LOGGING", StdOutImpl.class);
     typeAliasRegistry.registerAlias("NO_LOGGING", NoLoggingImpl.class);
 
+    // 源码解析: 注册代理工厂别名
     typeAliasRegistry.registerAlias("CGLIB", CglibProxyFactory.class);
     typeAliasRegistry.registerAlias("JAVASSIST", JavassistProxyFactory.class);
 
@@ -686,6 +705,7 @@ public class Configuration {
 
   public MappedStatement getMappedStatement(String id, boolean validateIncompleteStatements) {
     if (validateIncompleteStatements) {
+      // 源码解析: 构建所有的方法映射声明
       buildAllStatements();
     }
     return mappedStatements.get(id);

@@ -46,13 +46,19 @@ import org.apache.ibatis.session.SqlSession;
  *
  * @author Clinton Begin
  */
+
+// 源码解析: SqlSession的默认实现
 public class DefaultSqlSession implements SqlSession {
 
+  // 源码解析: 配置
   private Configuration configuration;
+  // 源码解析: 执行器
   private Executor executor;
-
+  // 源码解析: 是否自动提交
   private boolean autoCommit;
+  // 源码解析: 是否脏数据
   private boolean dirty;
+  // 源码解析: 游标右边
   private List<Cursor<?>> cursorList;
 
   public DefaultSqlSession(Configuration configuration, Executor executor, boolean autoCommit) {
@@ -71,13 +77,18 @@ public class DefaultSqlSession implements SqlSession {
     return this.<T>selectOne(statement, null);
   }
 
+  /**
+   * 源码解析: select一个元素
+   */
   @Override
   public <T> T selectOne(String statement, Object parameter) {
     // Popular vote was to return null on 0 results and throw exception on too many.
     List<T> list = this.<T>selectList(statement, parameter);
     if (list.size() == 1) {
+      // 源码解析: 结果集大小等于1, 直接返回
       return list.get(0);
     } else if (list.size() > 1) {
+      // 源码解析: 结果集大小大于1, 抛出异常
       throw new TooManyResultsException("Expected one result (or null) to be returned by selectOne(), but found: " + list.size());
     } else {
       return null;
@@ -141,10 +152,15 @@ public class DefaultSqlSession implements SqlSession {
     return this.selectList(statement, parameter, RowBounds.DEFAULT);
   }
 
+  /**
+   * 源码解析: select list
+   */
   @Override
   public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
     try {
+      // 源码解析: 从配置查询Mapper映射声明
       MappedStatement ms = configuration.getMappedStatement(statement);
+      // 源码解析: 执行器查询
       return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
     } catch (Exception e) {
       throw ExceptionFactory.wrapException("Error querying database.  Cause: " + e, e);

@@ -20,6 +20,8 @@ import org.apache.ibatis.reflection.MetaObject;
 /**
  * @author Clinton Begin
  */
+
+// 源码解析: 对象包装工厂
 public interface ObjectWrapperFactory {
 
   boolean hasWrapperFor(Object object);

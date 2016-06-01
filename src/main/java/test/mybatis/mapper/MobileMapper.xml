@@ -4,15 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test.mybatis.mapper.MobileMapper">
 
+    <sql id="mobileField">
+        os, brand, model, price
+    </sql>
+
     <insert id="insertMobile" parameterType="mobile">
         insert into Mobile(os, brand, model, price) values (#{os}, #{brand}, #{model}, #{price})
     </insert>
 
-    <delete id="deleteMobile" parameterType="int">
+    <delete id="deleteMobile" parameterType="int" flushCache="true" statementType="PREPARED" timeout="100">
         delete from Mobile where id = #{id} limit 1
     </delete>
 
-    <update id="updateMobilePrice" parameterType="mobile">
+    <update id="updateMobilePrice" parameterType="mobile" flushCache="true" statementType="PREPARED" timeout="100">
         update Mobile set price = #{price} where id = #{id} limit 1
     </update>
 

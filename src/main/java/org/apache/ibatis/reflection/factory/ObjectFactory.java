@@ -23,6 +23,8 @@ import java.util.Properties;
  * 
  * @author Clinton Begin
  */
+
+// 源码解析: 对象工厂
 public interface ObjectFactory {
 
   /**

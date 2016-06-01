@@ -6,8 +6,11 @@
 
     <mappers>
         <!--<mapper class=""/>-->
+
         <!--<mapper url=""/>-->
+
         <!--<mapper resource=""/>-->
+
         <package name="test.mybatis.mapper"/>
     </mappers>
 

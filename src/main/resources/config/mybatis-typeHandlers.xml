@@ -5,6 +5,8 @@
 <configuration>
 
     <typeHandlers>
+        <!--<typeHandler handler="test.mybatis.handler.JsonMapTypeHandler" javaType="java.util.Map" jdbcType="VARCHAR"/>-->
+
         <package name="test.mybatis.handler"/>
     </typeHandlers>
 

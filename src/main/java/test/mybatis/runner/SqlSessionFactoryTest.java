@@ -9,6 +9,8 @@ public class SqlSessionFactoryTest extends MyBatisJUnitTest {
     @Test
     @MyBatis(openSession = false)
     public void test() {
+        assertNotNull(sqlSessionFactory);
+        assertNotNull(sqlSessionFactory.getConfiguration());
     }
 
 }

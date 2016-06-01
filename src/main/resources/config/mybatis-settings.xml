@@ -5,7 +5,19 @@
 <configuration>
 
     <settings>
+        <!-- 缓存开关 -->
         <setting name="cacheEnabled" value="false"/>
+
+        <!-- 延迟加载开关 -->
+        <setting name="lazyLoadingEnabled" value="false"/>
+
+        <!-- 默认的执行器类型 -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+
+        <!-- 默认的超时时间 -->
+        <setting name="defaultStatementTimeout" value="5"/>
+
+        <!-- 日志实现 -->
         <setting name="logImpl" value="LOG4J"/>
     </settings>
 
