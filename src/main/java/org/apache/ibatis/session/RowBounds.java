@@ -26,7 +26,9 @@ public class RowBounds {
   public static final int NO_ROW_LIMIT = Integer.MAX_VALUE;
   public static final RowBounds DEFAULT = new RowBounds();
 
+  // 源码解析: 偏移, 默认为0
   private int offset;
+  // 源码解析: 限制, 默认为Integer.MAX_VALUE
   private int limit;
 
   public RowBounds() {
