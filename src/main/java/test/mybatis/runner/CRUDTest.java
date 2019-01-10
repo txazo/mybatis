@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class CrudTest extends MyBatisJUnitTest {
+public class CRUDTest extends MyBatisJUnitTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(CrudTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(CRUDTest.class);
 
     @Test
     @MyBatis
