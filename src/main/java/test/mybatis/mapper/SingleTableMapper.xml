@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.mybatis.mapper.SingleTableMapper">
+
+    <insert id="insertSingleTable" parameterType="singleTable">
+        insert into single_table(key1, key2, key3, key_part1, key_part2, key_part3, common_field)
+        values (#{key1}, #{key2}, #{key3}, #{keyPart1}, #{keyPart2}, #{keyPart3}, #{commonField})
+    </insert>
+
+</mapper>
